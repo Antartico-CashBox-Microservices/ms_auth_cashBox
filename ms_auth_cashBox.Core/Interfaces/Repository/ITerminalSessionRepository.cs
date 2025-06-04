@@ -10,7 +10,7 @@ namespace ms_auth_cashBox.Core.Interfaces.Repository
     public interface ITerminalSessionRepository : IGenericRepository<TerminalSession>
     {
         Task<TerminalSession> IsSessionActiveAsync(string NroTerminal);
-        Task<bool> AddSessionAsync(TerminalSession terminalSession);
+        Task <bool>AddSessionAsync(TerminalSession terminalSession);
         Task<bool> UpdateSessionAsync(TerminalSession terminalSession);
     }
 }

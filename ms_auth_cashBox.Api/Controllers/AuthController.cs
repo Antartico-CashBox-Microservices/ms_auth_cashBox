@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using ms_auth_cashBox.Core.DTOs;
 using ms_auth_cashBox.Core.Entities;
 using ms_auth_cashBox.Core.Interfaces;
+using ms_auth_cashBox.Infrastructure.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -61,6 +62,18 @@ namespace ms_auth_cashBox.Api.Controllers
             {
                 return Unauthorized(new { messge=$"Sesion activa con Terminal={TermNro}"});
             }
+
+            var terminal = await _unitOfWork.TerminalRepository.GetTerminalByNro(TermNro);
+            var session = new TerminalSession
+            {
+                Id = Guid.NewGuid(),
+                TerminalId = terminal.Id,
+                UserId = usuario.Id,
+                LoginTime = DateTime.UtcNow,
+                LogoutTime = null
+            };
+            
+            var isOk = _unitOfWork.TerminalSessionRepository.AddAsync(session);
 
             // Construir claims
             var claims = new List<Claim>

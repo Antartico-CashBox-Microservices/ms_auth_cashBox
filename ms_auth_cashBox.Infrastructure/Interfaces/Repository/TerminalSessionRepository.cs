@@ -17,9 +17,27 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Repository
         {
         }
 
-        public Task<bool> AddSessionAsync(TerminalSession terminalSession)
+        public async Task<bool> AddSessionAsync(TerminalSession terminalSession)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _dBcontext.terminalSession.AddAsync(terminalSession);
+                if (result != null)
+                {//return ter?.Enabled ?? false;
+                    _dBcontext.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                //return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"AddAsync(): Error:{ex.Message}");
+                throw new Exception("Exception in AddSessionAsync()");
+            }
         }
 
         public async Task<TerminalSession> IsSessionActiveAsync(string NroTerminal)
