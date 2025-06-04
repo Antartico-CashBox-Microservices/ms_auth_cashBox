@@ -73,7 +73,7 @@ namespace ms_auth_cashBox.Api.Controllers
                 LogoutTime = null
             };
             
-            var isOk = _unitOfWork.TerminalSessionRepository.AddAsync(session);
+            var isOk = _unitOfWork.TerminalSessionRepository.AddSessionAsync(session);
 
             // Construir claims
             var claims = new List<Claim>
