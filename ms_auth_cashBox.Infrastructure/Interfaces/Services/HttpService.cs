@@ -14,7 +14,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Services
     public class HttpService : IHttpService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly ILogger _logger;
+        private readonly ILogger<HttpService> _logger;
 
         public HttpService(IHttpClientFactory httpClientFactory, ILogger<HttpService> logger)
         {
