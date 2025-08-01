@@ -13,7 +13,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Repository
 {
     public class TerminalRepository : GenericRepository<Terminal>, ITerminalRepository
     {
-        public TerminalRepository(ApplicationDbContext dBContext, ILogger logger) : base(dBContext, logger)
+        public TerminalRepository(ApplicationDbContext dBContext, ILogger<GenericRepository<Terminal>> logger) : base(dBContext, logger)
         {
         }
 

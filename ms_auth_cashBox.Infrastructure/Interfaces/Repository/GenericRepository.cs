@@ -22,11 +22,11 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Repository
     /// <typeparam name="T"></typeparam>
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly ILogger _logger;
+        protected readonly ILogger<GenericRepository<T>> _logger;
         protected readonly ApplicationDbContext _dBcontext;
         protected readonly DbSet<T> _dbSet;
 
-        public GenericRepository(ApplicationDbContext dbContext, ILogger logger)
+        public GenericRepository(ApplicationDbContext dbContext, ILogger<GenericRepository<T>> logger)
         {
             _dBcontext = dbContext;
             _dbSet = _dBcontext.Set<T>();

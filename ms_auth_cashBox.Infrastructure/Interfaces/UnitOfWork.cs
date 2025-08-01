@@ -15,7 +15,8 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces
     public class UnitOfWork : IUnitOfWork
     {
         #region -- Constructor --
-        private readonly ILogger _logger;
+        //private readonly ILogger _logger;
+        private readonly ILoggerFactory _loggerFactory;
         private readonly ApplicationDbContext _dbContext;
         private readonly ICashBoxRepository _cashBoxRepository;
         private readonly ITerminalRepository _terminalRepository;
@@ -27,7 +28,8 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces
         public UnitOfWork(ApplicationDbContext dbContext, ILoggerFactory logger)
         {
             _dbContext = dbContext;
-            _logger = logger.CreateLogger("Logs");
+            //_logger = logger.CreateLogger("Logs");
+            _loggerFactory = logger;
         }
         #endregion
 
@@ -39,7 +41,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces
                 {
                     return _cashBoxRepository;
                 }
-                else { return new CashBoxRepository(_dbContext, _logger); }
+                else { return new CashBoxRepository(_dbContext, _loggerFactory.CreateLogger<GenericRepository<CashBox>>()); }
             }
         }
 
@@ -48,7 +50,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces
             get
             {
                 if (_terminalRepository != null) { return _terminalRepository; }
-                else { return new TerminalRepository(_dbContext, _logger); }
+                else { return new TerminalRepository(_dbContext, _loggerFactory.CreateLogger<GenericRepository<Terminal>>()); }
             }
         }
 
@@ -57,7 +59,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces
             get
             {
                 if (_sucursalRepository != null) { return _sucursalRepository; }
-                else { return new SucursalRepository(_dbContext, _logger); }
+                else { return new SucursalRepository(_dbContext, _loggerFactory.CreateLogger<GenericRepository<Sucursal>>()); }
             }
         }
 
@@ -66,7 +68,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces
             get
             {
                 if (_authRepository != null) { return _authRepository; }
-                else { return new AuthRepository(_dbContext, _logger); }
+                else { return new AuthRepository(_dbContext, _loggerFactory.CreateLogger<GenericRepository<Usuario>>()); }
             }
         }
         
@@ -75,7 +77,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces
             get
             {
                 if (_roleRepository != null) { return _roleRepository; }
-                else { return new RoleReposotory(_dbContext, _logger); }
+                else { return new RoleReposotory(_dbContext, _loggerFactory.CreateLogger<GenericRepository<Role>>()); }
             }
         }
 
@@ -84,7 +86,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces
             get
             {
                 if (_terminalSessionRepository != null) { return _terminalSessionRepository; }
-                else { return new TerminalSessionRepository(_dbContext, _logger); }
+                else { return new TerminalSessionRepository(_dbContext, _loggerFactory.CreateLogger<GenericRepository<TerminalSession>>()); }
             }
         }
 

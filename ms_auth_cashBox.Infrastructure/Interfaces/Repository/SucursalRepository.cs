@@ -13,7 +13,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Repository
 {
     public class SucursalRepository : GenericRepository<Sucursal>, ISucursalRepository
     {
-        public SucursalRepository(ApplicationDbContext dBContext, ILogger logger) : base(dBContext, logger)
+        public SucursalRepository(ApplicationDbContext dBContext, ILogger<GenericRepository<Sucursal>> logger) : base(dBContext, logger)
         {
         }
 

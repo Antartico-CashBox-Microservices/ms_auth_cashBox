@@ -13,7 +13,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Repository
 {
     public class CashBoxRepository : GenericRepository<CashBox>, ICashBoxRepository
     {
-        public CashBoxRepository(ApplicationDbContext dBContext, ILogger logger) : base(dBContext, logger)
+        public CashBoxRepository(ApplicationDbContext dBContext, ILogger<GenericRepository<CashBox>> logger) : base(dBContext, logger)
         {
         }
 

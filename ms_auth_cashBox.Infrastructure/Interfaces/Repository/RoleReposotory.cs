@@ -16,7 +16,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Repository
     {
         private readonly ILogger _logger;
 
-        public RoleReposotory(ApplicationDbContext dbContext, ILogger logger) : base(dbContext, logger)
+        public RoleReposotory(ApplicationDbContext dbContext, ILogger<GenericRepository<Role>> logger) : base(dbContext, logger)
         {
             _logger = logger;
         }

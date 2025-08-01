@@ -15,7 +15,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Repository
     {
         //private readonly DbContext _dbContext;
 
-        public AuthRepository(ApplicationDbContext dbContext, ILogger logger) : base(dbContext, logger)
+        public AuthRepository(ApplicationDbContext dbContext, ILogger<GenericRepository<Usuario>> logger) : base(dbContext, logger)
         {
             //_dbContext = dbContext;
 
@@ -25,6 +25,7 @@ namespace ms_auth_cashBox.Infrastructure.Interfaces.Repository
         {
             try
             {
+                _logger.LogInformation($"HOLA {email}");
                 return await _dBcontext.usuario.Include(u => u.userRoles)
                     .ThenInclude(ur => ur.Role)
                     .FirstOrDefaultAsync(u => u.Email == email);
